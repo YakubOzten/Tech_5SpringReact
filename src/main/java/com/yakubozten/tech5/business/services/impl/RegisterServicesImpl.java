@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 // LOMBOK
 @RequiredArgsConstructor
@@ -46,7 +47,24 @@ public class RegisterServicesImpl implements IRegisterServices<RegisterDto, Regi
     // SPEED DATA
     @Override
     public List<RegisterDto> registerServiceSpeedData(long key) {
-        return null;
+        List<RegisterDto> registerDtoList=new ArrayList<>();
+        RegisterEntity registerEntity=null;
+        /*if (null != key){*/
+         for (int i=1;i<=key;i++){
+             registerEntity=RegisterEntity.builder()
+                     .registerNickName("nickname"+i)
+                     .registerName("name"+i)
+                     .registerSurname("surname"+i)
+                     .registerPassword(passwordEncoderBeanClass.passwordEncoderMethod().encode("root"))
+                     .registerEmail("email" + UUID.randomUUID().toString() + "@gmail.com")
+                     .registerIsPassive(true)
+                     .build();
+             iRegisterRepository.save(registerEntity);
+             registerDtoList.add(entityToDto(registerEntity));
+
+         }
+        /*}*/
+        return registerDtoList;
     }
 
     @Override
@@ -67,6 +85,17 @@ public class RegisterServicesImpl implements IRegisterServices<RegisterDto, Regi
         }
         return null;
     }
+
+    @Override
+    public RegisterDto loginServiceFindByEmail(String email) {
+        Optional<RegisterEntity> findEmailWithObject=  iRegisterRepository.findByRegisterEmail(email);
+        RegisterDto registerDto=entityToDto(findEmailWithObject.get());
+        if (registerDto != null) {
+            return registerDto;
+        }
+        return null;
+    }
+
     ////////////////////////////////////////////////////////////
     // REGISTER C R U D
     // CREATE
@@ -158,7 +187,7 @@ public class RegisterServicesImpl implements IRegisterServices<RegisterDto, Regi
         if (registerfindDto!=null)
             iRegisterRepository.deleteById(id);
 
-            return  registerfindDto;
+        return  registerfindDto;
 
     }
 }//end class Services

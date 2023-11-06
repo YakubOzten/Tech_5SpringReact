@@ -20,6 +20,7 @@ public interface IRegisterServices <D,E> {
     // LOGIN
     // FIND SURNAME
     public D loginServiceFindBySurname(String surname);
+    public D loginServiceFindByEmail(String email);
 
     ////////////////////////////////////////////////////////////
     // REGISTER C R U D
