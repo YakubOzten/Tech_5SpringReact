@@ -27,7 +27,7 @@ public interface IRegisterApi<D> {
     public ResponseEntity<?> registerApiFindById(Long id);
     // UPDATE
     public ResponseEntity<?> registerApiUpdate(Long id, D d);
-    // DELETE
+        // DELETE
     public ResponseEntity<?> registerApiDeleteById(Long id);
 
 

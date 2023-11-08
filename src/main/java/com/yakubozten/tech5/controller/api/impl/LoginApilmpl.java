@@ -80,15 +80,6 @@ public class LoginApilmpl implements ILoginApi {
                     .build();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResultNotFound);
         }
-       //Kullanıcı pasifse
-        if(findRegisterEntityByEmail != null && findRegisterEntityByEmail.getRegisterIsPassive()){
-          ApiResult apiResultNotFound=ApiResult.builder()
-                  .path("/login/api/v1.0.0/authentication")
-                  .status(401)
-                  .message("Kullancı aktif değil")
-                  .build();
-          return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResultNotFound);
-        }
         // Sistemde kullanıcı varsa
         String passwordHashing=findRegisterEntityByEmail.getRegisterPassword();
         // currentPassword rowsPassword
@@ -102,6 +93,16 @@ public class LoginApilmpl implements ILoginApi {
             // 401: UNAUTHORIZED (Yetkisiz Giriş)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResult);
         }
+       //Kullanıcı pasifse
+        if(findRegisterEntityByEmail != null && findRegisterEntityByEmail.getRegisterIsPassive()){
+          ApiResult apiResultNotFound=ApiResult.builder()
+                  .path("/login/api/v1.0.0/authentication")
+                  .status(401)
+                  .message("Kullancı aktif değil")
+                  .build();
+          return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResultNotFound);
+        }
+
         // Eğer kullanıcı varsa , aktifse ve  kullanıcı adı-şifre doğruysa
         Map<String,Object>mapList=new HashMap<>();
         mapList.put("nickname",findRegisterEntityByEmail.getRegisterNickname());
