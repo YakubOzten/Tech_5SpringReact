@@ -31,7 +31,7 @@ class RegisterServicesApi {
     // http://localhost:4444/register/api/v1.0.0/create
     //@PostMapping("/create")
     registerApiCreate(registerDto) {
-        return axios.post(`${REGISTER_URL}/create`, registerDto)
+        return axios.post(`${REGISTER_URL}/create`, registerDto);
     }
 
     // LIST
