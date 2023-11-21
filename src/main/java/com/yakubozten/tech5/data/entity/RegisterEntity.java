@@ -1,6 +1,6 @@
 package com.yakubozten.tech5.data.entity;
 
-import com.yakubozten.tech5.data.BaseEntity;
+import com.yakubozten.tech5.data.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

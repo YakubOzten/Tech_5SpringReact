@@ -63,7 +63,7 @@ public class RolesUserServicesImpl implements IRolesUserServices<RoleDto, RoleEn
             RoleEntity roleEntity = dtoToEntity(roleDto);
             roleEntity.setRoleName(roleEntity.getRoleName().toUpperCase());
             iRoleRepository.save(roleEntity);
-            roleDto.setId(roleEntity.getId());
+            roleDto.setId(roleEntity.getRolesId());
             roleDto.setSystemDate(roleEntity.getSystemDate());
             return roleDto;
         }
@@ -103,7 +103,7 @@ public class RolesUserServicesImpl implements IRolesUserServices<RoleDto, RoleEn
         RoleEntity roleEntity = null;
         if (rolesServiceFindById != null) {
             roleEntity = dtoToEntity(roleDto);
-            roleEntity.setId(id);
+            roleEntity.setRolesId(id);
             iRoleRepository.save(roleEntity);
         }
         return entityToDto(roleEntity);

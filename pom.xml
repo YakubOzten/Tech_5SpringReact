@@ -29,7 +29,7 @@
 
 	<!--properties-->
 	<properties>
-		<encoding>UTF-8</encoding>
+			<encoding>UTF-8</encoding>
 		<java.version>17</java.version>
 
 		<!--for maven-->
@@ -90,13 +90,11 @@
 			<optional>true</optional>
 		</dependency>-->
 
-		<!-- MAİL-->
-	   <!--
+		 <!--MAİL-->
 	   <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		-->
 
 		<!--Cache-->
 		<dependency>

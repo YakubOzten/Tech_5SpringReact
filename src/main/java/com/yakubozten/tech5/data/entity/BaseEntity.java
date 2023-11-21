@@ -1,4 +1,4 @@
-package com.yakubozten.tech5.data;
+package com.yakubozten.tech5.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;

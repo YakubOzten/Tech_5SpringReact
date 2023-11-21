@@ -11,7 +11,7 @@ import MainProject from './Components/MainProject'
 import FooterProject from './Components/FooterProject'
 
 // login
-import Login from './components/login/Login'
+import Login from './Components/login/Login'
 
 //register
 import RegisterCreate from './Components/register/RegisterCreate'
@@ -29,8 +29,12 @@ function RouterProject() {
     // RETURN
     return (
         <React.Fragment>
-            <HeaderProject logo="" />
+            <HeaderProject logo="fa-solid fa-cloud"></HeaderProject>
 
+
+            {/* ROUTING */}
+            {/* dark mode */}
+            {/* dark mode:App-header */}
             <div className="container mt-5 App-header">
                 <Routes>
 
@@ -56,7 +60,7 @@ function RouterProject() {
                 </Routes>
             </div>
 
-            <FooterProject copy="&copy; Bütün Haklar saklıdır." />
+            {/* <FooterProject copy="&copy; Bütün Haklar saklıdır." /> */}
         </React.Fragment>
     ) //end return
 } // end function 
