@@ -46,7 +46,7 @@ public class EmailDto {
     private String image="image.png";
 
     @Builder.Default
-    private String URL="http://localhost:4444/";
+    private String URL="http://localhost:8080/";
 
     @Builder.Default
     private Date createdDate=new Date(System.currentTimeMillis());

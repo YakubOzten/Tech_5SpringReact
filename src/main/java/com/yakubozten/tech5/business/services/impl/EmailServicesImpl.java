@@ -61,7 +61,9 @@ public class EmailServicesImpl implements IEmailServices<EmailDto, EmailEntity>
         //Mail Gönder
         javaMailSender.send(mailMessage);
         return emailDto;
-    }
+    }// end send Basic
+
+    // MAIL SEND IMMEDIAD Attachment
     @SneakyThrows
     @Override
     @Transactional // Create,delete,update eklemelisin

@@ -1,16 +1,18 @@
 package com.yakubozten.tech5.data.entity;
 
-import com.yakubozten.tech5.data.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.yakubozten.tech5.data.Embeddable.UserDetailsEmbeddable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Log4j2
@@ -19,15 +21,23 @@ import java.io.Serializable;
 @Builder
 
 // ENTITY
-@Entity
+@Entity(name = "Users")
 @Table(name = "registers")
-public class RegisterEntity extends BaseEntity implements Serializable {
+public class RegisterEntity  implements Serializable {
 
     // Serileştirme
     public static final long serialVersionUID=1L;
     // Global Variable (6)
     // Dikkat: message sonunda boşluk olmasın
     // unique = true,
+
+
+    // ManyToMany için kendi ID buraya yazdım BaseEntity yazmadım
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "register_nick_name",nullable = false, updatable = false,insertable = true,length = 100)
     private String registerNickName;
 
@@ -45,4 +55,42 @@ public class RegisterEntity extends BaseEntity implements Serializable {
 
     @Column(name = "active")
     private Boolean registerIsPassive=false;
+    // PAGE AUTHORIZATION (O Sayfaya yetkili Kişiler)
+    @Column(name="page_authorization")
+    private boolean pageAuthorization;
+
+    // DATE
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="system_date")
+    private Date systemDate;
+    //private LocalDate systemDate;
+
+    // ROLE ENTITIY
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<RoleEntity> roles = new HashSet<>();
+    //2.YOL
+	/*
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role",
+	joinColumns = {
+	            @JoinColumn(name = "user_id",referencedColumnName = "user_id")},
+	            inverseJoinColumns = {
+	                            @JoinColumn(name = "roles_id",referencedColumnName = "roles_id")
+	                            }
+	             )
+	 private List<RoleEntity> roles;
+	   */
+
+    // #######################################################
+    // USER DETAILS
+    // @Embedded
+    // @Embeddable
+    // @EmbeddedId
+    @Embedded
+    private UserDetailsEmbeddable userDetailsEmbeddable=new UserDetailsEmbeddable();
 }//end class

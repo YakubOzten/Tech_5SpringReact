@@ -19,10 +19,15 @@ import java.io.Serializable;
 
 public class RoleDto  extends AuditingAwareBaseDto implements Serializable {
     // Serileştirme
-    public static final Long serialVersionUID=1L;
+    public static final long serialVersionUID=1L;
+
+    // ROLE ID
+    private Long rolesId;
+
     // ROLE NAME
-    @NotEmpty(message="{role.name.validation.constraints.NotNull.message}")
-    @AnnotationRoleNameUnique
+    // Eğer Bir kullanıcı Admin belirlememişse Bu kullanıcı USER olduk
+    @NotEmpty(message = "{role.name.validation.constraints.NotNull.message}")
+    @AnnotationRoleNameUnique // Kendi Annotation RolName yazdım
     @Builder.Default
-    private String roleName= ERolles.USER.getValue().toString();
+    private String roleName= ERolles.USER.toString();
 }//end class
